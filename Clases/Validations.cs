@@ -6,7 +6,7 @@ namespace Compilador.Clases
     public class ValidationsExpression
     {
         string expression;
-        string regex = @"([0-9(),[\]{} ])";
+        string regex = @"(^[0-9(),[\]{} ]*$)";
         public ValidationsExpression(string expression) { 
             this.expression = expression;
         }

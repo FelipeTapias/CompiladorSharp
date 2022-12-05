@@ -31,7 +31,7 @@ public class FileContent
     public void ReadFile()
     { 
         string line;
-        Console.WriteLine("Lectura de archivo");
+        Console.WriteLine("Reading file");
         line = streamReader.ReadLine();
         while (line != null)
         {
@@ -49,7 +49,7 @@ public class FileContent
         string allLines = "";
         string line;
 
-        Console.WriteLine("Ordenamiento del archivo");
+        Console.WriteLine("Ordering file");
         line = streamReader.ReadLine();
         while (line != null)
         {
