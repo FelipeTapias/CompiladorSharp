@@ -7,31 +7,43 @@ namespace Compilador.Clases
     {
         string expression;
         string regex = @"(^[0-9(),[\]{} ]*$)";
-        public ValidationsExpression(string expression) { 
+        public ValidationsExpression(string expression) 
+        { 
             this.expression = expression;
         }
 
-        public void CharacterValidation() {
-            Match match = Regex.Match(expression, regex);
-
-            var a = match.Value;
-
-            if (!match.Success)
+        public void isEmptyExpression() 
+        {
+            if (this.expression.Length == 0)
             {
-                throw new Exception("The expression contents invalid characters");
+                throw new Exception("Warning: The expression is empty");
             }
-
-            Console.WriteLine("Es correcta");
         }
 
-        /// <summary>
-        /// Determinar si tiene llave de apertura y de cierre
-        /// </summary>
+        public void CharacterValidation() 
+        {
+            Match match = Regex.Match(expression, regex);
+            if (!match.Success)
+            {
+                throw new Exception("Error: The expression contents invalid characters");
+            }
+        }
+
         public void OpenAndClose()
         {
-            //if (this.expression[0] == "{ ") { 
-            //}
-            Console.WriteLine($"{this.expression[0]} y {this.expression[this.expression.Length-1]}");
+            if (this.expression[0] == '{' || this.expression[this.expression.Length - 1] == '}') {
+                if (this.expression[0] != '{' || this.expression[this.expression.Length - 1] != '}')
+                {
+                    if (this.expression[0] == '{')
+                    {
+                        throw new Exception("Error: Missing universal closing brace '}'");
+                    }
+                    else
+                    {
+                        throw new Exception("Error: Missing universal opening brace '{'");
+                    }
+                }
+            }
         }
     }
 }

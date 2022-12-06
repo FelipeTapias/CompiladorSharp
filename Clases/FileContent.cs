@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
 
 namespace Compilador.Clases;
@@ -7,10 +8,6 @@ public class FileContent
 {
     StreamReader streamReader;
 
-    /// <summary>
-    /// Constructor
-    /// </summary>
-    /// <param name="path"></param>
     public FileContent(string path)
     {
         try
@@ -25,9 +22,6 @@ public class FileContent
     
     }
 
-    /// <summary>
-    /// Function to read the selected file
-    /// </summary>
     public void ReadFile()
     { 
         string line;
@@ -35,21 +29,16 @@ public class FileContent
         line = streamReader.ReadLine();
         while (line != null)
         {
-            Console.WriteLine(line);
+            Console.WriteLine(line);    
             line = streamReader.ReadLine();
         }
         Console.ReadLine();
     }
 
-    /// <summary>
-    /// Function to order and remove the space the selected file
-    /// </summary>
     public string OrderFile()
     {
         string allLines = "";
         string line;
-
-        Console.WriteLine("Ordering file");
         line = streamReader.ReadLine();
         while (line != null)
         {
