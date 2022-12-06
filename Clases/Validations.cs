@@ -16,6 +16,7 @@ namespace Compilador.Clases
         {
             if (this.expression.Length == 0)
             {
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 throw new Exception("Warning: The expression is empty");
             }
         }
@@ -25,6 +26,7 @@ namespace Compilador.Clases
             Match match = Regex.Match(expression, regex);
             if (!match.Success)
             {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 throw new Exception("Error: The expression contents invalid characters");
             }
         }
@@ -34,6 +36,7 @@ namespace Compilador.Clases
             if (this.expression[0] == '{' || this.expression[this.expression.Length - 1] == '}') {
                 if (this.expression[0] != '{' || this.expression[this.expression.Length - 1] != '}')
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     if (this.expression[0] == '{')
                     {
                         throw new Exception("Error: Missing universal closing brace '}'");
@@ -42,6 +45,10 @@ namespace Compilador.Clases
                     {
                         throw new Exception("Error: Missing universal opening brace '{'");
                     }
+                } else if (this.expression.Length == 2)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    throw new Exception("Warning: The expression incorrect '{}'");
                 }
             }
         }

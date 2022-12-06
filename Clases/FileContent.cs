@@ -16,8 +16,8 @@ public class FileContent
         }
         catch (Exception error)
         {
-            throw new Exception(
-            "File couldn't find, verify the path", error);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            throw new Exception("File couldn't find, verify the path", error);
         }
     
     }
@@ -25,7 +25,6 @@ public class FileContent
     public void ReadFile()
     { 
         string line;
-        Console.WriteLine("Reading file");
         line = streamReader.ReadLine();
         while (line != null)
         {
