@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Compilador.Helpers;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 
 namespace Compilador.Clases
@@ -14,10 +15,10 @@ namespace Compilador.Clases
 
         public void isEmptyExpression() 
         {
-            if (this.expression.Length == 0)
+            if (string.IsNullOrEmpty(expression))
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                throw new Exception("Warning: The expression is empty");
+                throw new ExcepcionCompiler(ExceptionMessage.EmptyExpression);
             }
         }
 
@@ -27,28 +28,28 @@ namespace Compilador.Clases
             if (!match.Success)
             {
                 Console.ForegroundColor = ConsoleColor.DarkRed;
-                throw new Exception("Error: The expression contents invalid characters");
+                throw new ExcepcionCompiler(ExceptionMessage.InvalidCharacters);
             }
         }
 
         public void OpenAndClose()
         {
-            if (this.expression[0] == '{' || this.expression[this.expression.Length - 1] == '}') {
-                if (this.expression[0] != '{' || this.expression[this.expression.Length - 1] != '}')
+            if (expression[0] == '{' || expression[expression.Length - 1] == '}') {
+                if (expression[0] != '{' || expression[expression.Length - 1] != '}')
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    if (this.expression[0] == '{')
+                    if (expression[0] == '{')
                     {
-                        throw new Exception("Error: Missing universal closing brace '}'");
+                        throw new ExcepcionCompiler(ExceptionMessage.ClosingBrace);
                     }
                     else
                     {
-                        throw new Exception("Error: Missing universal opening brace '{'");
+                        throw new ExcepcionCompiler(ExceptionMessage.OpeningBrace);
                     }
-                } else if (this.expression.Length == 2)
+                } else if (expression.Length == 2)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    throw new Exception("Warning: The expression incorrect '{}'");
+                    throw new ExcepcionCompiler(ExceptionMessage.OnlyHasBrace);
                 }
             }
         }

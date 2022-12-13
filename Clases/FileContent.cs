@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Compilador.Helpers;
+using System;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata.Ecma335;
@@ -17,21 +18,9 @@ public class FileContent
         catch (Exception error)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
-            throw new Exception("File couldn't find, verify the path", error);
+            throw new ExcepcionCompiler(ExceptionMessage.FileNotFound);
         }
     
-    }
-
-    public void ReadFile()
-    { 
-        string line;
-        line = streamReader.ReadLine();
-        while (line != null)
-        {
-            Console.WriteLine(line);    
-            line = streamReader.ReadLine();
-        }
-        Console.ReadLine();
     }
 
     public string OrderFile()
