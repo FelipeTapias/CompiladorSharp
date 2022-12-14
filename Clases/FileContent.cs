@@ -1,39 +1,42 @@
 ﻿using Compilador.Helpers;
 using System;
 using System.IO;
-using System.Net.Http.Headers;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Compilador.Clases;
 public class FileContent
 {
-    StreamReader streamReader;
-
+    public string path { get; private set; }
     public FileContent(string path)
     {
-        try
-        {
-            streamReader = new StreamReader(path);
-        }
-        catch (Exception error)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            throw new ExcepcionCompiler(ExceptionMessage.FileNotFound);
-        }
-    
+        if(path is null)
+            throw new ArgumentNullException("path");
+        
+        this.path = path;      
     }
 
     public string OrderFile()
     {
-        string allLines = "";
-        string line;
-        line = streamReader.ReadLine();
-        while (line != null)
+        try
         {
-            allLines += line.Trim();
-            line = streamReader.ReadLine();
+            using (StreamReader streamReader = new StreamReader(path))
+            {
+
+                string allLines = "";
+                string? line;
+                line = streamReader.ReadLine();
+                while (line != null)
+                {
+                    allLines += line.Trim();
+                    line = streamReader.ReadLine();
+                }
+                return allLines;
+            }
         }
-        return allLines;
+        catch (Exception ex)
+        {
+
+            throw new ExcepcionCompiler(ExceptionMessage.FileNotFound);
+        }
     }
 }
 

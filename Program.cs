@@ -5,7 +5,7 @@ class CompiladorC
 {
     public static void Main()
     {
-        string pathFile = "C:\\Compilador\\configuration.txt";
+        string pathFile = "C:\\configuration.txt";
         string expression;
         try
         {

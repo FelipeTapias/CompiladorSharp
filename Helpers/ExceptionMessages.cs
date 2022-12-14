@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Linq.Expressions;
 
 namespace Compilador.Helpers
 {
